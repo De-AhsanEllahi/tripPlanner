@@ -1,12 +1,10 @@
-from django.urls import path, include
-from rest_framework.routers import DefaultRouter
-from .views import TripViewSet, health
-
-
-router = DefaultRouter()
-router.register(r"trips", TripViewSet, basename="trip")
+from django.urls import path
+from . import views
 
 urlpatterns = [
-    path("", include(router.urls)),
-    path("health/", health),
+    path("health/", views.health),
+    path("trips/", views.create_trip),
+    path("trips/<int:trip_id>/", views.get_trip),
+    path("trips/<int:trip_id>/logs/", views.get_trip_logs),
+    path("trips/<int:trip_id>/pdf/", views.download_trip_pdf),
 ]
